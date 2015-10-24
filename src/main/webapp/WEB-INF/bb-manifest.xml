@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.blackboard.com/bb-manifest-plugin"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.blackboard.com/bb-manifest-plugin https://maven.blackboard.com/content/repositories/releases/blackboard/platform/bb-manifest-plugin/9.1.110082.0/bb-manifest-plugin-9.1.110082.0.xsd">
+  <plugin>
+
+    <name value="b2.name" />
+    <handle value="community-template-var" />
+    <description value="b2.description" />
+    <default-locale value="en_US" />
+	<webapp-type value="javaext"/>
+    <version value="1.0" />
+    <requires>
+      <bbversion value="9.1.120123.0" />
+    </requires>
+
+    <vendor>
+      <id value="elea" />
+      <name value="eLearning Media" />
+      <url value="http://www.elearningmedia.es" />
+      <description value="eLearning Media" />
+    </vendor>
+    
+    <extension-defs>
+ 		<definition namespace="blackboard.platform">
+ 			<extension id="customContextHandler" point="blackboard.platform.contextHandler" class="es.elearningmedia.CustomContextHandler" singleton="false" />
+ 		</definition>		
+ 	</extension-defs>
+        <application-defs>
+            <application handle="community-template-var" type="shared" use-ssl="false" 
+            	name="b2.name" can-allow-guest="false">
+                <description>b2.description</description>
+                <links></links>
+            </application>
+        </application-defs>
+
+    <permissions>
+      <permission type="attribute" name="user.authinfo" actions="get"/>
+      <permission type="attribute" name="user.personalinfo" actions="get,set"/>
+    </permissions>
+
+  </plugin>
+</manifest>
