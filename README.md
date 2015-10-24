@@ -1,6 +1,4 @@
-Template variable para url de asignatura
+Custom template variable
 =================
 
-Este proyecto es para crear una variable de plantilla para mostrar el contenido del campo descripción de la 
-asignatura en el editor WYSIWYG de contenidos usando el código @X@variable-personalizada.hola@X@. Este campo contendrá
-cuaquier información que podamos obtener con el API o desde cualquier servicio externo que programemos.
+Create a custom template variable to include in VTBE whatever you can obtain programatically with @X@user.first_name@X@.
