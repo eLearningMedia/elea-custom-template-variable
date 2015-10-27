@@ -7,7 +7,11 @@ apply plugin: "idea"
 group "es.elearningmedia"
 version "1.0-SNAPSHOT"
 
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
 ext {
+  learnVersion = "9.1.201404.160205"
   deployServer = "192.168.0.101:9876"
   deployInstance = "BBLEARN"
 }
@@ -28,9 +32,7 @@ dependencies {
   providedCompile "javax.servlet:servlet-api:2.5",
                   "javax.servlet.jsp:jsp-api:2.1"
 
-  // Dependencies are libraries needed to build, but should not be included in the B2 WAR.
-  // You should NEVER include Learn JARs (other than webapis) in your B2.
-  providedCompile( "blackboard.platform:bb-platform:9.1.120113.0" ) { transitive = false }
+  providedCompile( "blackboard.platform:bb-platform:${learnVersion}" ) { transitive = false }
 
   buildUtils "org.oscelot:b2deploy-task:0.1.0"
 }

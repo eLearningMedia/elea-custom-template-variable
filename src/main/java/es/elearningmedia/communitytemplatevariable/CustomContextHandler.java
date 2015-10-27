@@ -1,4 +1,4 @@
-package es.elearningmedia;
+package es.elearningmedia.communitytemplatevariable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -6,10 +6,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import blackboard.data.user.User;
 import blackboard.persist.BbPersistenceManager;
 import blackboard.platform.context.Context;
 import blackboard.platform.context.ContextEntry;
 import blackboard.platform.context.ContextHandler;
+import blackboard.platform.context.ContextManagerFactory;
 import blackboard.platform.security.EntitlementList;
 import blackboard.platform.security.Entitlements;
 import blackboard.platform.security.SecurityContext;
@@ -17,7 +19,7 @@ import blackboard.util.resolver.Resolver;
 
 //Extends ContextHandler class to include our variable resolver
 public class CustomContextHandler implements ContextHandler {
-
+	
 	public CustomContextHandler() {
 
 	}
@@ -33,13 +35,13 @@ public class CustomContextHandler implements ContextHandler {
 	public List<SecurityContext> getSecurityContexts(Context unused) {
 		return new ArrayList<SecurityContext>();
 	}
-
-	// Here is were we inyect our custom resolver
+	//Here is were we inyect our custom resolver
 	public List<ContextEntry> resolveKeys(HttpServletRequest request,
 			BbPersistenceManager unused) {
-		CustomResolver resolver = new CustomResolver(request);
+		User user = ContextManagerFactory.getInstance().getContext().getUser();
+		CustomResolver resolver = new CustomResolver(user);
 		Resolver.attachResolverToContext(resolver);
 		return new LinkedList<ContextEntry>();
 	}
-
+	
 }
