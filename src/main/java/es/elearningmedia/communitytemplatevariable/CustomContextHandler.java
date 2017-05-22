@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import blackboard.data.course.Course;
 import blackboard.data.user.User;
 import blackboard.persist.BbPersistenceManager;
 import blackboard.platform.context.Context;
@@ -38,8 +39,10 @@ public class CustomContextHandler implements ContextHandler {
 	//Here is were we inyect our custom resolver
 	public List<ContextEntry> resolveKeys(HttpServletRequest request,
 			BbPersistenceManager unused) {
-		User user = ContextManagerFactory.getInstance().getContext().getUser();
-		CustomResolver resolver = new CustomResolver(user);
+		Context ctx = ContextManagerFactory.getInstance().getContext();
+		User user = ctx.getUser();
+		Course course = ctx.getCourse();
+		CustomResolver resolver = new CustomResolver(user, course);
 		Resolver.attachResolverToContext(resolver);
 		return new LinkedList<ContextEntry>();
 	}

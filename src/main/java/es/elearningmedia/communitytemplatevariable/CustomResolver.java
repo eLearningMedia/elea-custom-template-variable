@@ -1,5 +1,6 @@
 package es.elearningmedia.communitytemplatevariable;
 
+import blackboard.data.course.Course;
 import blackboard.data.user.User;
 import blackboard.util.resolver.ResolverComponent;
 
@@ -10,16 +11,18 @@ import blackboard.util.resolver.ResolverComponent;
  */
 public class CustomResolver implements ResolverComponent {
 
-	private static final String[] DEFAULT_KEYS = { "custom_user" };
+	private static final String[] DEFAULT_KEYS = { "custom_user", "custom_course" };
 	private User _user = null;
+	private Course _course = null;
 	private final String[] _keys;
 
-	public CustomResolver(User user) {
-		this(DEFAULT_KEYS, user);
+	public CustomResolver(User user, Course course) {
+		this(DEFAULT_KEYS, user, course);
 	}
 
-	public CustomResolver(String[] keys, User user) {
+	public CustomResolver(String[] keys, User user, Course course) {
 		this._user = user;
+		this._course = course;
 		this._keys = keys;
 	}
 
@@ -33,6 +36,14 @@ public class CustomResolver implements ResolverComponent {
 
 			if ("first_name".equalsIgnoreCase(method)) {
 				return this._user.getGivenName();
+			}
+
+		}
+		
+		if (this._course != null) {
+
+			if ("description".equalsIgnoreCase(method)) {
+				return this._course.getDescription();
 			}
 
 		}
